@@ -92,23 +92,23 @@ const successStories = [
         color: "from-orange-500 to-amber-500",
         accent: "text-orange-400"
     },
-    {
-        id: 6,
-        client: "StyleConfig",
-        title: "Product Customizer Plugin",
-        description: "Engineered a complex product customization tool allowing users to preview billions of potential product combinations in real-time.",
-        challenge: "The client sells highly customizable furniture. They needed a way for customers to visualize exactly what they were buying to reduce returns.",
-        solution: "We built a 3D product configurator using Three.js and WebGL. This allows users to rotate, zoom, and change materials on their furniture in real-time directly in the browser.",
-        stats: [
-            { label: "Combinations", value: "1B+" },
-            { label: "Engagement", value: "+200%" },
-            { label: "Return Rate", value: "-30%" }
-        ],
-        tags: ["WebGL", "Three.js", "Interactive", "React"],
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
-        color: "from-fuchsia-500 to-violet-500",
-        accent: "text-fuchsia-400"
-    },
+    // {
+    //     id: 6,
+    //     client: "StyleConfig",
+    //     title: "Product Customizer Plugin",
+    //     description: "Engineered a complex product customization tool allowing users to preview billions of potential product combinations in real-time.",
+    //     challenge: "The client sells highly customizable furniture. They needed a way for customers to visualize exactly what they were buying to reduce returns.",
+    //     solution: "We built a 3D product configurator using Three.js and WebGL. This allows users to rotate, zoom, and change materials on their furniture in real-time directly in the browser.",
+    //     stats: [
+    //         { label: "Combinations", value: "1B+" },
+    //         { label: "Engagement", value: "+200%" },
+    //         { label: "Return Rate", value: "-30%" }
+    //     ],
+    //     tags: ["WebGL", "Three.js", "Interactive", "React"],
+    //     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
+    //     color: "from-fuchsia-500 to-violet-500",
+    //     accent: "text-fuchsia-400"
+    // },
 ];
 
 export default function SuccessStoryDetail() {

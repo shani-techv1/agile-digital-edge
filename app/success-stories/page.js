@@ -71,19 +71,19 @@ const successStories = [
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop",
         color: "from-orange-500 to-amber-500"
     },
-    {
-        id: 6,
-        client: "StyleConfig",
-        title: "Product Customizer Plugin",
-        description: "Engineered a complex product customization tool allowing users to preview billions of potential product combinations in real-time.",
-        stats: [
-            { label: "Combinations", value: "1B+" },
-            { label: "Engagement", value: "+200%" },
-        ],
-        tags: ["WebGL", "Three.js", "Interactive"],
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
-        color: "from-fuchsia-500 to-violet-500"
-    },
+    // {
+    //     id: 6,
+    //     client: "StyleConfig",
+    //     title: "Product Customizer Plugin",
+    //     description: "Engineered a complex product customization tool allowing users to preview billions of potential product combinations in real-time.",
+    //     stats: [
+    //         { label: "Combinations", value: "1B+" },
+    //         { label: "Engagement", value: "+200%" },
+    //     ],
+    //     tags: ["WebGL", "Three.js", "Interactive"],
+    //     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
+    //     color: "from-fuchsia-500 to-violet-500"
+    // },
 ];
 
 export default function SuccessStoriesPage() {
