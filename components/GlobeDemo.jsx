@@ -5,15 +5,15 @@ import { Activity, Globe2, Server } from "lucide-react";
 
 export default function GlobeDemo() {
     return (
-        <section className="py-20 bg-dark-blue relative overflow-hidden" id="globe-demo">
-            <div className="container mx-auto px-6 relative z-10">
+        <section className="py-12 md:py-20 bg-dark-blue relative overflow-hidden" id="globe-demo">
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="w-full max-w-6xl mx-auto rounded-3xl bg-[#0a0a0a] overflow-hidden relative">
                     {/* Ambient glow */}
                     <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full pointer-events-none" />
 
-                    <div className="flex flex-col md:flex-row min-h-[500px]">
+                    <div className="flex flex-col md:flex-row min-h-[400px] md:min-h-[500px]">
                         {/* Left content */}
-                        <div className="flex-1 flex flex-col justify-center p-10 md:p-14 relative z-10">
+                        <div className="flex-1 flex flex-col justify-center p-6 sm:p-10 md:p-14 relative z-10">
                             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-gray-400 mb-6 w-fit backdrop-blur-sm">
                                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                                 All systems operational
@@ -31,30 +31,30 @@ export default function GlobeDemo() {
                                 We’re a global team of innovators, designers, and developers who love building amazing digital experiences. From San Francisco to Sydney, we’re making waves around the world.
                             </p>
 
-                            <div className="flex items-center gap-6">
-                                <div>
-                                    <p className="text-2xl font-bold text-white flex items-center gap-2">
+                            <div className="flex flex-wrap md:flex-nowrap items-center gap-4 md:gap-6">
+                                <div className="w-full sm:w-auto">
+                                    <p className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
                                         <Server className="w-5 h-5 text-blue-400" /> 150+
                                     </p>
-                                    <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Edge Nodes</p>
+                                    <p className="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Edge Nodes</p>
                                 </div>
-                                <div className="w-px h-10 bg-white/10" />
-                                <div>
-                                    <p className="text-2xl font-bold text-white flex items-center gap-2">
+                                <div className="hidden sm:block w-px h-10 bg-white/10" />
+                                <div className="w-[45%] sm:w-auto">
+                                    <p className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
                                         <Activity className="w-5 h-5 text-green-400" /> &lt;50ms
                                     </p>
-                                    <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Avg Latency</p>
+                                    <p className="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Avg Latency</p>
                                 </div>
-                                <div className="w-px h-10 bg-white/10" />
-                                <div>
-                                    <p className="text-2xl font-bold text-white">99.99%</p>
-                                    <p className="text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Uptime</p>
+                                <div className="hidden sm:block w-px h-10 bg-white/10" />
+                                <div className="w-[45%] sm:w-auto">
+                                    <p className="text-xl md:text-2xl font-bold text-white">99.99%</p>
+                                    <p className="text-[10px] md:text-xs text-gray-500 mt-1 uppercase tracking-wider font-semibold">Uptime</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right — Globe */}
-                        <div className="flex-1 flex items-center justify-center p-4 md:p-0 min-h-[400px] relative">
+                        <div className="flex-1 flex items-center justify-center p-4 md:p-6 lg:p-0 min-h-[300px] md:min-h-[400px] relative overflow-hidden">
                             {/* Optional Unsplash background image overlay for texture */}
                             <div
                                 className="absolute inset-0 opacity-[0.03] bg-cover bg-center pointer-events-none mix-blend-screen"
