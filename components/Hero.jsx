@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
@@ -19,6 +19,7 @@ export default function Hero() {
   const subheadlineRef = useRef(null);
   const ctaRef = useRef(null);
   const shapesRef = useRef([]);
+  const [showSpline, setShowSpline] = useState(false);
 
   const splitText = (text) => {
     return text.split("").map((char, index) => (
@@ -81,7 +82,16 @@ export default function Hero() {
       });
     }, containerRef);
 
-    return () => ctx.revert();
+    // Defer heavy WebGL execution (Spline) completely off the critical rendering path
+    // giving time for the LCP and typing text to render at 60fps first.
+    const splineTimer = setTimeout(() => {
+      setShowSpline(true);
+    }, 1200);
+
+    return () => {
+      ctx.revert();
+      clearTimeout(splineTimer);
+    };
   }, []);
 
   return (
@@ -193,10 +203,16 @@ export default function Hero() {
       {/* Right Spline Scene - positioned absolutely on desktop, stacked on mobile */}
       <div className="w-full h-[45vh] lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full z-10 flex items-center justify-center pointer-events-auto order-last lg:order-none">
         <div className="w-full h-full relative">
-          <SplineScene
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
+          {showSpline ? (
+            <SplineScene
+              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+              className="w-full h-full"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="w-12 h-12 border-t-2 border-primary border-solid rounded-full animate-spin opacity-50"></div>
+            </div>
+          )}
           {/* subtle glow behind spline */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/20 blur-[100px] -z-10 rounded-full opacity-40"></div>
         </div>

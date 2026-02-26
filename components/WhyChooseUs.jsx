@@ -50,7 +50,7 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "", prefix = "" }) => {
 
 const WhyChooseUs = () => {
     return (
-        <section className="py-24 bg-white/5 backdrop-blur-sm">
+        <section className="py-24">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-16">
                     <div className="md:w-1/2">

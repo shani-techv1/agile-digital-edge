@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -8,6 +9,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
   const pathname = usePathname();
   const menuRef = useRef(null);
   const linksRef = useRef([]);
@@ -78,8 +80,14 @@ export default function Header() {
         ease: "power3.in",
         display: "none",
       });
+      // Reset active dropdown when menu closes
+      setTimeout(() => setActiveMobileDropdown(null), 500);
     }
   }, [isOpen]);
+
+  const toggleMobileDropdown = (name) => {
+    setActiveMobileDropdown(activeMobileDropdown === name ? null : name);
+  };
 
   return (
     <header
@@ -89,7 +97,7 @@ export default function Header() {
       <div className="container mx-auto px-6 flex justify-between items-center relative z-50">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold tracking-tight text-white group">
-          <img src="/logo/LogoSize.svg" alt="Logo" className="w-36" />
+          <Image src="/logo/LogoSize.svg" alt="Logo" width={144} height={40} className="w-36" priority />
         </Link>
 
         {/* Desktop Menu */}
@@ -159,26 +167,49 @@ export default function Header() {
       >
         <nav className="flex flex-col space-y-6 text-center max-h-[80vh] overflow-y-auto px-4">
           {navLinks.map((link, index) => (
-            <div key={link.name} className="flex flex-col items-center">
-              {link.href ? (
+            <div key={link.name} className="flex flex-col items-center w-full">
+              {link.href && !link.dropdown ? (
+                // Regular links without dropdowns
                 <Link
                   href={link.href}
                   ref={(el) => (linksRef.current[index] = el)}
-                  onClick={() => !link.dropdown && setIsOpen(false)}
+                  onClick={() => setIsOpen(false)}
                   className="text-2xl font-bold text-white hover:text-primary transition-colors mb-2"
                 >
                   {link.name}
                 </Link>
               ) : (
-                <span
-                  ref={(el) => (linksRef.current[index] = el)}
-                  className="text-2xl font-bold text-white hover:text-primary transition-colors mb-2 cursor-pointer"
-                >
-                  {link.name}
-                </span>
+                // Items with Dropdowns (can be actual links or just headers)
+                <div className="flex flex-col items-center w-full">
+                  <div
+                    ref={(el) => (linksRef.current[index] = el)}
+                    onClick={() => toggleMobileDropdown(link.name)}
+                    className="text-2xl font-bold text-white hover:text-primary transition-colors mb-2 cursor-pointer flex items-center gap-2"
+                  >
+                    {link.name}
+                    {link.dropdown && (
+                      <ChevronDown size={20} className={`transition-transform duration-300 ${activeMobileDropdown === link.name ? 'rotate-180' : ''}`} />
+                    )}
+                  </div>
+                </div>
               )}
+
+              {/* Dropdown Items */}
               {link.dropdown && (
-                <div className="flex flex-col space-y-2 mt-2">
+                <div
+                  className={`flex flex-col space-y-3 overflow-hidden transition-all duration-300 ease-in-out ${activeMobileDropdown === link.name ? 'max-h-[500px] opacity-100 mt-2 mb-4' : 'max-h-0 opacity-0'
+                    }`}
+                >
+                  {/* Provide direct link to category page if category has an href */}
+                  {link.href && link.dropdown && activeMobileDropdown === link.name && (
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className="text-lg text-primary font-semibold hover:text-white transition-colors"
+                    >
+                      Overview
+                    </Link>
+                  )}
                   {link.dropdown.map((item) => (
                     <Link
                       key={item.name}
