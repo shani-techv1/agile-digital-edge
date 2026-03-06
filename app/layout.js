@@ -17,6 +17,9 @@ export const metadata = {
     shortcut: "/logo/agile.png",
     apple: "/logo/agile.png",
   },
+  verification: {
+    google: "BzFHuu6Sxw_ouhf4F5HW3mVdb_x50yCQrWZ6IkgNd60",
+  },
 };
 
 export default function RootLayout({ children }) {
