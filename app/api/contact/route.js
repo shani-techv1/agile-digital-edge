@@ -3,33 +3,36 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
     try {
-        const { name, company, email, phone, service, budget, message, consent } = await req.json();
+        const { name, company, email, phone, service, budget, message } = await req.json();
+        console.log(process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASS);
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            host: process.env.SMTP_HOST, // smtp.gmail.com
+            port: process.env.SMTP_PORT, // 465
+            secure: process.env.SMTP_PORT == 465,
             auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
             },
         });
 
         const mailOptions = {
-            from: email,
-            to: process.env.EMAIL_USER,
+            from: `"Website Inquiry" <${process.env.SMTP_USER}>`,
+            replyTo: email,
+            to: process.env.SMTP_USER,
             subject: `New Project Inquiry from ${name} - ${service}`,
             html: `
-        <h3>New Project Inquiry</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Company:</strong> ${company || 'Not provided'}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <p><strong>Service Interest:</strong> ${service || 'Not specified'}</p>
-        <p><strong>Budget Range:</strong> ${budget || 'Not specified'}</p>
-        <p><strong>SMS Consent:</strong> ${consent ? 'Yes' : 'No'}</p>
-        <hr />
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
+                <h3>New Project Inquiry</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Company:</strong> ${company || "Not provided"}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
+                <p><strong>Service Interest:</strong> ${service || "Not specified"}</p>
+                <p><strong>Budget Range:</strong> ${budget || "Not specified"}</p>
+                <hr />
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `,
         };
 
         await transporter.sendMail(mailOptions);

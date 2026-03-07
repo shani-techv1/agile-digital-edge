@@ -41,13 +41,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.consent) {
-      setStatus({
-        type: "error",
-        message: "Please agree to the privacy policy to continue.",
-      });
-      return;
-    }
+    // if (!formData.consent) {
+    //   setStatus({
+    //     type: "error",
+    //     message: "Please agree to the privacy policy to continue.",
+    //   });
+    //   return;
+    // }
 
     setIsSubmitting(true);
     setStatus(null);
@@ -132,7 +132,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white mb-1">Call Us</h3>
-                  <p className="text-gray-400">+91 6393173883</p>
+                  <p className="text-gray-400">+91 88102 27237</p>
                   <p className="text-gray-400">+(561) 327-7682</p>
                 </div>
               </div>
