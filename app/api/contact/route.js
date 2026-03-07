@@ -4,7 +4,6 @@ import { NextResponse } from 'next/server';
 export async function POST(req) {
     try {
         const { name, company, email, phone, service, budget, message } = await req.json();
-        console.log(process.env.SMTP_HOST, process.env.SMTP_PORT, process.env.SMTP_USER, process.env.SMTP_PASS);
 
         const transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST, // smtp.gmail.com
