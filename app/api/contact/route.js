@@ -19,6 +19,7 @@ export async function POST(req) {
             from: `"Website Inquiry" <${process.env.SMTP_USER}>`,
             replyTo: email,
             to: process.env.SMTP_USER,
+            cc: 'shani@agiledigitaledge.com',
             subject: `New Project Inquiry from ${name} - ${service}`,
             html: `
                 <h3>New Project Inquiry</h3>
