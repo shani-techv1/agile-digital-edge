@@ -30,6 +30,7 @@ export default function Header() {
         { name: "Brand Strategy", href: "/services/brand-strategy" },
         { name: "Content Creation", href: "/services/content-creation" },
         { name: "Cloud Solutions", href: "/services/cloud-solutions" },
+        { name: "White Label Software Development", href: "/white-label-software-developer" },
       ],
     },
     {
