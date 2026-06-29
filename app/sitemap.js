@@ -2,7 +2,7 @@ export default function sitemap() {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://agiledigitaledge.com";
 
     // Base routes
-    const routes = ['', '/about', '/contact', '/services', '/success-stories', '/work', '/blogs'].map((route) => ({
+    const routes = ['', '/about', '/contact', '/services', '/success-stories', '/work', '/blogs', '/privacy-policy', '/terms-and-conditions'].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),
         changeFrequency: 'weekly',

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 
@@ -275,7 +276,11 @@ export default function Contact() {
                   Agile Digital Edge related to conversation purposes. You may
                   reply STOP to opt out at any time. Reply HELP for assistance.
                   Messages and data rates may apply. Message frequency will
-                  vary, please visit our Privacy Policy.
+                  vary, please visit our{" "}
+                  <Link href="/privacy-policy" className="text-primary hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
                 </label>
               </div>
 
