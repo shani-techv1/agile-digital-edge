@@ -11,7 +11,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalPage
       title={privacyPolicy.title}
-      effectiveDate={privacyPolicy.effectiveDate}
+      effectiveDate={"Jan 2026"}
       sections={privacyPolicy.sections}
     />
   );

@@ -11,7 +11,7 @@ export default function TermsAndConditionsPage() {
   return (
     <LegalPage
       title={termsAndConditions.title}
-      effectiveDate={termsAndConditions.effectiveDate}
+      effectiveDate={"Jan 2026"}
       sections={termsAndConditions.sections}
     />
   );
