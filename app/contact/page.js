@@ -1,11 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-export default function Contact() {
+function ContactContent() {
   const containerRef = useRef(null);
+  const searchParams = useSearchParams();
+  const planParam = searchParams.get("plan");
+
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -16,6 +19,54 @@ export default function Contact() {
     message: "",
     consent: false,
   });
+
+  useEffect(() => {
+    if (planParam) {
+      const isSeo = planParam.includes("SEO");
+      const isPpc = planParam.includes("PPC");
+      const isSmo = planParam.includes("SMO");
+
+      let serviceVal = "Web Development";
+      if (isSeo) serviceVal = "SEO";
+      else if (isPpc) serviceVal = "PPC Marketing";
+      else if (isSmo) serviceVal = "SMO Marketing";
+
+      setFormData((prev) => ({
+        ...prev,
+        service: serviceVal,
+        message: `Hi, I am interested in the ${planParam} package. Please contact me with more information.`,
+        budget: isSeo
+          ? planParam === "SEO Essential"
+            ? "< $5k"
+            : planParam === "SEO Advanced"
+              ? "$5k - $10k"
+              : planParam === "SEO Professional"
+                ? "$10k - $20k"
+                : "$20k - $50k"
+          : isPpc
+            ? planParam === "PPC Essential"
+              ? "< $5k"
+              : planParam === "PPC Advanced"
+                ? "$5k - $10k"
+                : planParam === "PPC Professional"
+                  ? "$10k - $20k"
+                  : "$20k - $50k"
+            : isSmo
+              ? planParam === "SMO Essential"
+                ? "< $5k"
+                : planParam === "SMO Advanced"
+                  ? "$5k - $10k"
+                  : "$10k - $20k"
+              : planParam === "Web Essential"
+                ? "< $5k"
+                : planParam === "Web Advanced"
+                  ? "$5k - $10k"
+                  : planParam === "Web Professional"
+                    ? "$10k - $20k"
+                    : "$20k - $50k",
+      }));
+    }
+  }, [planParam]);
   const [status, setStatus] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -225,6 +276,8 @@ export default function Contact() {
                     <option value="UI/UX Design">UI/UX Design</option>
                     <option value="Branding">Branding</option>
                     <option value="SEO">SEO</option>
+                    <option value="PPC Marketing">PPC Marketing</option>
+                    <option value="SMO Marketing">SMO Marketing</option>
                     <option value="E-Commerce">E-Commerce</option>
                   </select>
                 </div>
@@ -304,5 +357,13 @@ export default function Contact() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense fallback={<div className="pt-40 pb-20 min-h-screen flex items-center justify-center bg-black text-white">Loading...</div>}>
+      <ContactContent />
+    </Suspense>
   );
 }

@@ -34,6 +34,16 @@ export default function Header() {
       ],
     },
     {
+      name: "Packages",
+      href: null,
+      dropdown: [
+        { name: "Web Design Packages", href: "/web-packages" },
+        { name: "SEO Packages", href: "/seo-packages" },
+        { name: "PPC Packages", href: "/ppc-packages" },
+        { name: "SMO Packages", href: "/smo-packages" },
+      ],
+    },
+    {
       name: "Resources",
       href: null,
       dropdown: [
