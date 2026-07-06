@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useRef, useState, Suspense } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
+
 
 function ContactContent() {
   const containerRef = useRef(null);
