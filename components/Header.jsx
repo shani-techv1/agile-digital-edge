@@ -47,7 +47,7 @@ export default function Header() {
       name: "Resources",
       href: null,
       dropdown: [
-        { name: "Blogs", href: "https://blog.agiledigitaledge.com/" },
+        { name: "Blogs", href: "https://blog.agiledigitaledge.com" },
         { name: "Success Stories", href: "/success-stories" },
       ],
     },
