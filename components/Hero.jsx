@@ -23,14 +23,18 @@ export default function Hero() {
 
   const splitText = (text) => {
     return text.split("").map((char, index) => (
-      <span key={index} className="reveal-text opacity-0">
+      <span key={index} className="reveal-text opacity-0 max-lg:opacity-100">
         {char === " " ? "\u00A0" : char}
       </span>
     ));
   };
 
   useEffect(() => {
+    const isPhone = window.matchMedia("(max-width: 1023px)").matches;
+
     const ctx = gsap.context(() => {
+      if (isPhone) return;
+
       // Headline Typing Animation
       const tl = gsap.timeline({ defaults: { ease: "none" } });
 
@@ -136,7 +140,7 @@ export default function Hero() {
                 <span className="text-white relative inline-block">
                   {splitText("Edge")}
                   <svg
-                    className="absolute w-full h-3 -bottom-1 left-0 text-primary reveal-svg opacity-0"
+                    className="absolute w-full h-3 -bottom-1 left-0 text-primary reveal-svg opacity-60 lg:opacity-0"
                     viewBox="0 0 100 10"
                     preserveAspectRatio="none"
                   >
@@ -158,18 +162,24 @@ export default function Hero() {
             role="region"
             aria-label="Our services: Web Development, Product Design, Digital Solutions, and more."
           >
-            <TypeAnimation
-              sequence={[
-                "Web Development • Product Design • Digital Solutions",
-                1000,
-                "Shopify Apps • Mobile Applications • Artifical Intelligence",
-                1000,
-              ]}
-              wrapper="p"
-              speed={50}
-              style={{ display: "inline-block" }}
-              repeat={Infinity}
-            />
+            <div className="lg:hidden space-y-1">
+              <p>Web Development • Product Design • Digital Solutions</p>
+              <p>Shopify Apps • Mobile Applications • Artifical Intelligence</p>
+            </div>
+            <div className="hidden lg:block">
+              <TypeAnimation
+                sequence={[
+                  "Web Development • Product Design • Digital Solutions",
+                  1000,
+                  "Shopify Apps • Mobile Applications • Artifical Intelligence",
+                  1000,
+                ]}
+                wrapper="p"
+                speed={50}
+                style={{ display: "inline-block" }}
+                repeat={Infinity}
+              />
+            </div>
           </div>
 
           <div
@@ -203,22 +213,16 @@ export default function Hero() {
             {/* Glowing Core & Status */}
             <div className="relative flex flex-col items-center justify-center mb-5">
               {/* Pulsing Backlight */}
-              <div className="absolute w-36 h-36 bg-gradient-to-tr from-primary/30 via-accent-blue/20 to-secondary/30 rounded-full blur-2xl -z-10 animate-pulse"></div>
+              <div className="absolute w-36 h-36 bg-gradient-to-tr from-primary/30 via-accent-blue/20 to-secondary/30 rounded-full blur-2xl -z-10"></div>
 
-              {/* Rotating Holographic Tech Badge */}
+              {/* Holographic Tech Badge */}
               <div className="relative w-24 h-24 flex items-center justify-center">
-                <div
-                  className="absolute inset-0 rounded-full border border-dashed border-primary/40"
-                  style={{ animation: "spin 20s linear infinite" }}
-                ></div>
-                <div
-                  className="absolute inset-2 rounded-full border border-white/10"
-                  style={{ animation: "spin 12s linear infinite reverse" }}
-                >
+                <div className="absolute inset-0 rounded-full border border-dashed border-primary/40"></div>
+                <div className="absolute inset-2 rounded-full border border-white/10">
                   <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-blue shadow-[0_0_8px_#00f0ff]"></div>
                 </div>
                 <div className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-primary/30 via-accent-blue/20 to-secondary/30 backdrop-blur-lg border border-white/20 flex items-center justify-center shadow-[inset_0_0_15px_rgba(59,130,246,0.5)]">
-                  <Sparkles className="w-6 h-6 text-accent-blue animate-pulse" />
+                  <Sparkles className="w-6 h-6 text-accent-blue" />
                 </div>
               </div>
             </div>
