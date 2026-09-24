@@ -162,24 +162,18 @@ export default function Hero() {
             role="region"
             aria-label="Our services: Web Development, Product Design, Digital Solutions, and more."
           >
-            <div className="lg:hidden space-y-1">
-              <p>Web Development • Product Design • Digital Solutions</p>
-              <p>Shopify Apps • Mobile Applications • Artifical Intelligence</p>
-            </div>
-            <div className="hidden lg:block">
-              <TypeAnimation
-                sequence={[
-                  "Web Development • Product Design • Digital Solutions",
-                  1000,
-                  "Shopify Apps • Mobile Applications • Artifical Intelligence",
-                  1000,
-                ]}
-                wrapper="p"
-                speed={50}
-                style={{ display: "inline-block" }}
-                repeat={Infinity}
-              />
-            </div>
+            <TypeAnimation
+              sequence={[
+                "Web Development • Product Design • Digital Solutions",
+                1000,
+                "Shopify Apps • Mobile Applications • Artifical Intelligence",
+                1000,
+              ]}
+              wrapper="p"
+              speed={50}
+              style={{ display: "inline-block" }}
+              repeat={Infinity}
+            />
           </div>
 
           <div
