@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
 
-
 function ContactContent() {
   const containerRef = useRef(null);
   const searchParams = useSearchParams();
@@ -187,7 +186,7 @@ function ContactContent() {
                 <div>
                   <h3 className="text-lg font-bold text-white mb-1">Call Us</h3>
                   <p className="text-gray-400">+91 88102 27237</p>
-                  <p className="text-gray-400">+(561) 327-7682</p>
+                  <p className="text-gray-400">+1 (561) 327-7682</p>
                 </div>
               </div>
 
@@ -202,6 +201,9 @@ function ContactContent() {
                   <p className="text-gray-400">
                     Tower A, Urbtech Trade Centre, A-319, Noida, Uttar Pradesh
                     201301
+                  </p>
+                  <p className="text-gray-400 mt-3">
+                    5 Penn Plaza, New York, NY 10001, US
                   </p>
                 </div>
               </div>
@@ -332,7 +334,10 @@ function ContactContent() {
                   reply STOP to opt out at any time. Reply HELP for assistance.
                   Messages and data rates may apply. Message frequency will
                   vary, please visit our{" "}
-                  <Link href="/privacy-policy" className="text-primary hover:underline">
+                  <Link
+                    href="/privacy-policy"
+                    className="text-primary hover:underline"
+                  >
                     Privacy Policy
                   </Link>
                   .
@@ -364,7 +369,13 @@ function ContactContent() {
 
 export default function Contact() {
   return (
-    <Suspense fallback={<div className="pt-40 pb-20 min-h-screen flex items-center justify-center bg-black text-white">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="pt-40 pb-20 min-h-screen flex items-center justify-center bg-black text-white">
+          Loading...
+        </div>
+      }
+    >
       <ContactContent />
     </Suspense>
   );
