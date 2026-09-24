@@ -67,7 +67,7 @@ const replies = {
     suggestions: ["Web development", "Contact the team"],
   },
   contact: {
-    text: "Email hello@agiledigitaledge.com, call +91 88102 27237 or +1 (561) 327-7682, or send a note on the contact page. Studios: Tower A, Urbtech Trade Centre, A-319, Noida, Uttar Pradesh 201301, and 5 Penn Plaza, New York, NY 10001, US.",
+    text: "Email hello@agiledigitaledge.com, call +1 (561) 327-7682, or send a note on the contact page. Studios:5 Penn Plaza, New York, NY 10001, US.",
     links: contactLinks,
     suggestions: ["Pricing packages", "Our services"],
   },
