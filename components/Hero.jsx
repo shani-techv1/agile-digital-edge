@@ -4,7 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { gsap } from "gsap";
 import { TypeAnimation } from "react-type-animation";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle, Sparkles, TrendingUp, CheckCircle, Clock } from "lucide-react";
 import { Spotlight } from "./ui/Spotlight";
 
 // Dynamically import SplineScene with distinct loading state and no SSR
@@ -97,7 +97,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-black/[0.96] antialiased flex flex-col lg:block"
+      className="relative w-full min-h-screen lg:h-screen overflow-hidden bg-black/[0.96] antialiased flex flex-col justify-center lg:block"
     >
       <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
 
@@ -115,9 +115,9 @@ export default function Hero() {
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent-blue/10 rounded-full blur-3xl filter -z-10 opacity-30"
       ></div>
 
-      <div className="container relative z-10 mx-auto px-6 flex-1 lg:h-full flex flex-col justify-center lg:justify-start pt-20 lg:pt-0 pointer-events-none">
+      <div className="container relative z-10 mx-auto px-6 flex-1 lg:h-full flex flex-col justify-center lg:justify-start pt-24 pb-10 lg:py-0 pointer-events-none">
         {/* Left Content */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left z-20 mt-20 lg:mt-0 h-full pointer-events-auto">
+        <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left z-20 mt-4 lg:mt-0 h-full pointer-events-auto">
           <div ref={headlineRef} className="mb-6">
             <h1
               className="text-2xl sm:text-3xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] text-white mb-4"
@@ -197,11 +197,75 @@ export default function Hero() {
               View Our Work
             </Link>
           </div>
+
+          {/* Mobile-Only Interactive Visual & Trust Showcase */}
+          <div className="lg:hidden mt-8 w-full max-w-sm mx-auto pointer-events-auto flex flex-col items-center">
+            {/* Glowing Core & Status */}
+            <div className="relative flex flex-col items-center justify-center mb-5">
+              {/* Pulsing Backlight */}
+              <div className="absolute w-36 h-36 bg-gradient-to-tr from-primary/30 via-accent-blue/20 to-secondary/30 rounded-full blur-2xl -z-10 animate-pulse"></div>
+
+              {/* Rotating Holographic Tech Badge */}
+              <div className="relative w-24 h-24 flex items-center justify-center">
+                <div
+                  className="absolute inset-0 rounded-full border border-dashed border-primary/40"
+                  style={{ animation: "spin 20s linear infinite" }}
+                ></div>
+                <div
+                  className="absolute inset-2 rounded-full border border-white/10"
+                  style={{ animation: "spin 12s linear infinite reverse" }}
+                >
+                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-blue shadow-[0_0_8px_#00f0ff]"></div>
+                </div>
+                <div className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-primary/30 via-accent-blue/20 to-secondary/30 backdrop-blur-lg border border-white/20 flex items-center justify-center shadow-[inset_0_0_15px_rgba(59,130,246,0.5)]">
+                  <Sparkles className="w-6 h-6 text-accent-blue animate-pulse" />
+                </div>
+              </div>
+            </div>
+
+            {/* 3 Glassmorphic Impact Cards */}
+            <div className="grid grid-cols-3 gap-2 w-full mb-3.5">
+              <div className="flex flex-col items-center justify-center py-2.5 px-2 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md text-center">
+                <div className="flex items-center text-accent-blue text-xs font-semibold mb-0.5">
+                  <TrendingUp className="w-3.5 h-3.5 mr-1" />
+                  <span>500+</span>
+                </div>
+                <span className="text-[10px] text-gray-400 font-light leading-tight">Projects Launched</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center py-2.5 px-2 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md text-center">
+                <div className="flex items-center text-primary text-xs font-semibold mb-0.5">
+                  <CheckCircle className="w-3.5 h-3.5 mr-1" />
+                  <span>98%</span>
+                </div>
+                <span className="text-[10px] text-gray-400 font-light leading-tight">Client Retention</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center py-2.5 px-2 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md text-center">
+                <div className="flex items-center text-secondary text-xs font-semibold mb-0.5">
+                  <Clock className="w-3.5 h-3.5 mr-1" />
+                  <span>24/7</span>
+                </div>
+                <span className="text-[10px] text-gray-400 font-light leading-tight">Support</span>
+              </div>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="flex flex-wrap justify-center items-center gap-1.5 text-[11px] text-gray-400">
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Next.js</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">AI Solutions</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Mobile Apps</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Shopify Theme</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Shopify Apps</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Wordpress</span>
+              <span className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 backdrop-blur-sm">Cloud Native</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Right Spline Scene - positioned absolutely on desktop, stacked on mobile */}
-      <div className="w-full h-[45vh] lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full z-10 flex items-center justify-center pointer-events-auto order-last lg:order-none">
+      {/* Right Spline Scene - hidden on mobile, positioned absolutely on desktop */}
+      <div className="hidden lg:flex lg:absolute lg:top-0 lg:right-0 lg:w-1/2 lg:h-full z-10 items-center justify-center pointer-events-auto">
         <div className="w-full h-full relative">
           {showSpline ? (
             <SplineScene

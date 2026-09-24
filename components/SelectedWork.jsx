@@ -61,12 +61,14 @@ const selectedWorks = [
     category: "Pharmaceuticals",
     image: "/pharmmaex.jpeg",
     tech: ["NextJS", "React", "NodeJS"],
+    url: "https://portfolio.agiledigitaledge.dev/case-studies/13"
   },
   {
     title: "Compression",
     category: "Sport Branding",
     image: "/compression.jpeg",
     tech: ["Shopify"],
+    url: "https://portfolio.agiledigitaledge.dev/case-studies/1"
   },
   // {
   //   title: "SundanceYoga",
@@ -164,7 +166,7 @@ export default function SelectedWork() {
                 <p className="text-gray-400 mb-8 leading-relaxed">
                   A premium digital experience designed to solve complex user problems while engaging customers with immersive visuals and intuitive navigation.
                 </p>
-                <Link href="/work" className="inline-flex items-center text-white border-b border-primary pb-1 group-hover:text-primary transition-colors">
+                <Link href={work.url} className="inline-flex items-center text-white border-b border-primary pb-1 group-hover:text-primary transition-colors">
                   View Case Study <ArrowUpRight className="ml-2 w-4 h-4" />
                 </Link>
               </div>

@@ -16,12 +16,17 @@
   --foreground: #f8fafc;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 100%);
   color: var(--foreground);
   font-family: var(--font-sans);
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 /* Custom Utilities for Glassmorphism if not using standard tailwind classes */

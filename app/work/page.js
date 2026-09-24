@@ -114,10 +114,18 @@ export default function Work() {
                   {item.desc}
                 </p>
 
-                <div className="flex items-center text-primary font-medium opacity-100 transform translate-y-0 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-300">
+                <a
+                  href="https://portfolio.agiledigitaledge.dev/case-studies"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-primary font-medium opacity-100 transform translate-y-0 lg:opacity-0 lg:translate-y-4 lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-300 cursor-pointer"
+                >
                   <span>Learn more</span>
-                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </div>
+                  <ArrowRight
+                    size={16}
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                  />
+                </a>
               </div>
             </div>
           ))}
