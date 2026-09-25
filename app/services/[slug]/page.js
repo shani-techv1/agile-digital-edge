@@ -98,6 +98,32 @@ const servicesData = {
         techStack: ["Meta Business Suite", "LinkedIn Ads", "Buffer", "Canva"],
         benefits: ["Brand Awareness", "Direct Customer Communication", "Viral Potential", "Lead Generation"],
     },
+    "branding": {
+        title: "Branding",
+        subtitle: "Identities People Remember",
+        description: "We shape how your brand looks, sounds, and feels. From logo and visual systems to positioning and guidelines, we build identities that stay consistent across every touchpoint.",
+        features: [
+            { title: "Logo & Visual Identity", description: "A distinctive mark, color system, and typography that travel with your brand." },
+            { title: "Brand Guidelines", description: "Clear rules so every team and partner presents the brand the same way." },
+            { title: "Brand Positioning", description: "A sharp point of view that sets you apart from competitors." },
+            { title: "Rebranding", description: "A refreshed identity when your business has outgrown the old one." },
+        ],
+        techStack: ["Adobe Illustrator", "Photoshop", "Figma", "Brand Books"],
+        benefits: ["Customer Loyalty", "Consistent Presence", "Clear Communication", "Stronger Recognition"],
+    },
+    "product-engineering": {
+        title: "Product Engineering",
+        subtitle: "From Idea to a Product People Use",
+        description: "We take products from discovery through design, build, and launch. The result is software that is reliable in production and ready to grow with your roadmap.",
+        features: [
+            { title: "Product Discovery", description: "Scope, priorities, and a plan grounded in how people will actually use the product." },
+            { title: "Architecture & Build", description: "A solid technical foundation using modern web, mobile, and cloud stacks." },
+            { title: "Quality & Delivery", description: "Testing, reviews, and release practices that keep shipping predictable." },
+            { title: "Iteration After Launch", description: "Ongoing improvements driven by usage, feedback, and business goals." },
+        ],
+        techStack: ["Next.js", "React", "Node.js", "React Native", "AWS", "PostgreSQL"],
+        benefits: ["Faster Time to Market", "Scalable Architecture", "Fewer Production Surprises", "A Product You Can Grow"],
+    },
     "brand-strategy": {
         title: "Brand Strategy",
         subtitle: "More Than Just a Logo",
