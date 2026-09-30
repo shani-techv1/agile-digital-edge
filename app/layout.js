@@ -1,4 +1,5 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -26,9 +27,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          type="text/javascript"
+      <body
+        className={`${jakarta.variable} font-sans antialiased text-white`}
+      >
+        <Script
+          id="microsoft-clarity"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -37,10 +41,6 @@ export default function RootLayout({ children }) {
     })(window, document, "clarity", "script", "ypuu1ef5yj");`,
           }}
         />
-      </head>
-      <body
-        className={`${jakarta.variable} font-sans antialiased text-white`}
-      >
         <Header />
         <main>
           {children}
