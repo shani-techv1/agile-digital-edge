@@ -113,13 +113,13 @@ export default function Header() {
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center space-x-5 lg:space-x-8 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <nav className="hidden md:flex w-max items-center gap-x-4 lg:gap-x-6 xl:gap-x-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           {navLinks.map((link) => (
-            <div key={link.name} className="relative group">
+            <div key={link.name} className="relative group shrink-0">
               {link.href ? (
                 <Link
                   href={link.href}
-                  className={`text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 ${pathname === link.href ? "text-primary" : "text-gray-300"
+                  className={`whitespace-nowrap text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 ${pathname === link.href ? "text-primary" : "text-gray-300"
                     }`}
                 >
                   {link.name}
@@ -127,7 +127,7 @@ export default function Header() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent-green transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               ) : (
-                <span className="text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 text-gray-300 cursor-pointer">
+                <span className="whitespace-nowrap text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 text-gray-300 cursor-pointer">
                   {link.name}
                   {link.dropdown && <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent-green transition-all duration-300 group-hover:w-full"></span>
