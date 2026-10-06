@@ -52,6 +52,7 @@ export default function Header() {
       ],
     },
     { name: "About", href: "/about" },
+    { name: "Why Agile", href: "/why-agile" },
     { name: "Work", href: "/work" },
     { name: "Contact", href: "/contact" },
   ];
