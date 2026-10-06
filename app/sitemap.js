@@ -29,6 +29,7 @@ export default function sitemap() {
         entry("", { changeFrequency: "weekly", priority: 1 }),
         entry("/services", { changeFrequency: "weekly", priority: 0.9 }),
         entry("/about", { changeFrequency: "monthly", priority: 0.8 }),
+        entry("/why-agile", { changeFrequency: "monthly", priority: 0.8 }),
         entry("/work", { changeFrequency: "weekly", priority: 0.8 }),
         entry("/contact", { changeFrequency: "monthly", priority: 0.8 }),
         entry("/success-stories", { changeFrequency: "weekly", priority: 0.8 }),
