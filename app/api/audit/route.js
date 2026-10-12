@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getPayloadClient } from "../../../lib/payload";
 import { auditLeadSchema, fieldErrors } from "../../../lib/leads/validate";
+import { saveLead } from "../../../lib/leads/saveLead";
 import { submitLead } from "../../../lib/leads/submitLead";
 
 export async function POST(req) {
@@ -47,28 +48,11 @@ export async function POST(req) {
   }
 
   const lead = parsed.data;
-  const doc = await payload.create({
-    collection: "leads",
-    overrideAccess: true,
-    data: {
-      name: lead.name,
-      email: lead.email,
-      company: lead.company,
-      website: lead.website,
-      country: lead.country,
-      platform: lead.platform,
-      requirement: lead.requirement,
-      utmSource: lead.utmSource,
-      utmMedium: lead.utmMedium,
-      utmCampaign: lead.utmCampaign,
-      utmTerm: lead.utmTerm,
-      utmContent: lead.utmContent,
-      gclid: lead.gclid,
-      referrer: lead.referrer,
-      landingPath: lead.landingPath,
-      ip,
-      crmStatus: "skipped",
-    },
+  const doc = await saveLead({
+    ...lead,
+    source: "audit",
+    landingPath: lead.landingPath || "/free-ecommerce-audit",
+    ip,
   });
 
   try {

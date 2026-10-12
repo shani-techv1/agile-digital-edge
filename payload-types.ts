@@ -304,6 +304,18 @@ export interface LandingPage {
       | null;
   };
   caseStudies?: (string | CaseStudy)[] | null;
+  relatedIndustries?: (string | Industry)[] | null;
+  resources?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Service pages emit Service JSON-LD. Choose None to skip that block.
+   */
+  schemaType?: ('service' | 'none') | null;
   testimonials?:
     | {
         quote: string;
@@ -333,10 +345,20 @@ export interface LandingPage {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt: string;
@@ -395,6 +417,7 @@ export interface CaseStudy {
     role?: string | null;
   };
   related?: (string | CaseStudy)[] | null;
+  relatedServices?: (string | LandingPage)[] | null;
   cta?: {
     heading?: string | null;
     body?: string | null;
@@ -408,10 +431,20 @@ export interface CaseStudy {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt: string;
@@ -444,10 +477,20 @@ export interface Industry {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt: string;
@@ -463,10 +506,12 @@ export interface Lead {
   name: string;
   email: string;
   company: string;
-  website: string;
-  country: string;
-  platform: string;
-  requirement: string;
+  website?: string | null;
+  country?: string | null;
+  platform?: string | null;
+  requirement?: string | null;
+  source?: ('audit' | 'contact' | 'white-label' | 'cta') | null;
+  landingPath?: string | null;
   utmSource?: string | null;
   utmMedium?: string | null;
   utmCampaign?: string | null;
@@ -474,8 +519,12 @@ export interface Lead {
   utmContent?: string | null;
   gclid?: string | null;
   referrer?: string | null;
-  landingPath?: string | null;
   ip?: string | null;
+  owner?: (string | null) | User;
+  status?: ('new' | 'contacted' | 'qualified' | 'closed') | null;
+  /**
+   * Whether the notification email was sent. Lead status is separate.
+   */
   crmStatus?: ('skipped' | 'sent' | 'error') | null;
   crmProvider?: string | null;
   updatedAt: string;
@@ -746,6 +795,15 @@ export interface LandingPagesSelect<T extends boolean = true> {
             };
       };
   caseStudies?: T;
+  relatedIndustries?: T;
+  resources?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  schemaType?: T;
   testimonials?:
     | T
     | {
@@ -776,7 +834,11 @@ export interface LandingPagesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;
@@ -807,7 +869,11 @@ export interface IndustriesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;
@@ -867,6 +933,7 @@ export interface CaseStudiesSelect<T extends boolean = true> {
         role?: T;
       };
   related?: T;
+  relatedServices?: T;
   cta?:
     | T
     | {
@@ -881,7 +948,11 @@ export interface CaseStudiesSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;
@@ -900,6 +971,8 @@ export interface LeadsSelect<T extends boolean = true> {
   country?: T;
   platform?: T;
   requirement?: T;
+  source?: T;
+  landingPath?: T;
   utmSource?: T;
   utmMedium?: T;
   utmCampaign?: T;
@@ -907,8 +980,9 @@ export interface LeadsSelect<T extends boolean = true> {
   utmContent?: T;
   gclid?: T;
   referrer?: T;
-  landingPath?: T;
   ip?: T;
+  owner?: T;
+  status?: T;
   crmStatus?: T;
   crmProvider?: T;
   updatedAt?: T;
@@ -994,10 +1068,20 @@ export interface SolutionsHub {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt?: string | null;
@@ -1019,10 +1103,20 @@ export interface IndustriesHub {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt?: string | null;
@@ -1044,10 +1138,20 @@ export interface AuditPage {
      * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
      */
     image?: (string | null) | Media;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
     /**
      * Leave empty to use this page's own URL.
      */
     canonical?: string | null;
+    /**
+     * Leave empty to use the page title.
+     */
+    breadcrumbTitle?: string | null;
+    robots?: ('index, follow' | 'noindex, follow' | 'noindex, nofollow') | null;
+    /**
+     * Forces noindex, nofollow even if Robots says otherwise.
+     */
     noindex?: boolean | null;
   };
   updatedAt?: string | null;
@@ -1091,7 +1195,11 @@ export interface SolutionsHubSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;
@@ -1112,7 +1220,11 @@ export interface IndustriesHubSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;
@@ -1133,7 +1245,11 @@ export interface AuditPageSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         image?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         canonical?: T;
+        breadcrumbTitle?: T;
+        robots?: T;
         noindex?: T;
       };
   updatedAt?: T;

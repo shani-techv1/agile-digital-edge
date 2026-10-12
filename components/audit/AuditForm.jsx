@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "../../lib/analytics";
 import { PLATFORMS } from "../../lib/leads/validate";
 import { readStoredUtm } from "../seo/UtmCapture";
 
@@ -18,16 +19,25 @@ export default function AuditForm({ submitLabel = "Request the audit" }) {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
   const [pending, setPending] = useState(false);
+  const started = useRef(false);
 
   useEffect(() => {
     setFormStartedAt(Date.now());
+    track("form_view", { form_name: "audit" });
   }, []);
+
+  function markStart() {
+    if (started.current) return;
+    started.current = true;
+    track("form_start", { form_name: "audit" });
+  }
 
   async function onSubmit(event) {
     event.preventDefault();
     setPending(true);
     setMessage("");
     setErrors({});
+    track("form_submit", { form_name: "audit" });
     const form = new FormData(event.currentTarget);
     const payload = Object.fromEntries(form.entries());
     payload.formStartedAt = formStartedAt;
@@ -47,11 +57,12 @@ export default function AuditForm({ submitLabel = "Request the audit" }) {
       return;
     }
 
+    track("audit_request", { form_name: "audit" });
     router.push("/free-ecommerce-audit/thank-you");
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-6 grid gap-4" noValidate>
+    <form onSubmit={onSubmit} onFocusCapture={markStart} className="mt-6 grid gap-4" noValidate>
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Name" name="name" error={errors.name} autoComplete="name" required />
         <Field label="Business email" name="email" type="email" error={errors.email} autoComplete="email" required />

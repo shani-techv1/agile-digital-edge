@@ -66,6 +66,8 @@ export default buildConfig({
       },
       fields: ({ defaultFields }) => [
         ...defaultFields,
+        { name: "ogTitle", type: "text", label: "OG title" },
+        { name: "ogDescription", type: "textarea", label: "OG description" },
         {
           name: "canonical",
           type: "text",
@@ -73,10 +75,28 @@ export default buildConfig({
           admin: { description: "Leave empty to use this page's own URL." },
         },
         {
+          name: "breadcrumbTitle",
+          type: "text",
+          label: "Breadcrumb title",
+          admin: { description: "Leave empty to use the page title." },
+        },
+        {
+          name: "robots",
+          type: "select",
+          label: "Robots",
+          defaultValue: "index, follow",
+          options: [
+            { label: "index, follow", value: "index, follow" },
+            { label: "noindex, follow", value: "noindex, follow" },
+            { label: "noindex, nofollow", value: "noindex, nofollow" },
+          ],
+        },
+        {
           name: "noindex",
           type: "checkbox",
           label: "Hide from search engines",
           defaultValue: false,
+          admin: { description: "Forces noindex, nofollow even if Robots says otherwise." },
         },
       ],
     }),

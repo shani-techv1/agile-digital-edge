@@ -2,33 +2,37 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "../seo/Breadcrumbs";
 import JsonLd from "../seo/JsonLd";
+import RelatedLinks from "../seo/RelatedLinks";
+import { CtaSet } from "../cta/CtaLink";
 import { mediaUrl } from "../../lib/seo";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "../../lib/schema";
 
 export default function ServicePage({ page }) {
+  const crumbName = page.meta?.breadcrumbTitle || page.title;
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "Solutions", path: "/solutions" },
-    { name: page.title, path: `/${page.slug}` },
+    { name: crumbName, path: `/${page.slug}` },
   ];
   const faqs = page.faqs || [];
   const areaServed = page.pageType === "location" ? page.location?.country : undefined;
   const heroImage = mediaUrl(page.hero?.image);
+  const schema = [
+    breadcrumbSchema(crumbs),
+    faqSchema(faqs),
+  ];
+  if (page.schemaType !== "none") {
+    schema.splice(1, 0, serviceSchema({
+      name: page.title,
+      description: page.hero?.subheading || page.problem?.body || page.title,
+      path: `/${page.slug}`,
+      areaServed,
+    }));
+  }
 
   return (
     <article className="bg-black text-white">
-      <JsonLd
-        data={[
-          breadcrumbSchema(crumbs),
-          serviceSchema({
-            name: page.title,
-            description: page.hero?.subheading || page.problem?.body || page.title,
-            path: `/${page.slug}`,
-            areaServed,
-          }),
-          faqSchema(faqs),
-        ]}
-      />
+      <JsonLd data={schema} />
       <header className="container mx-auto px-6 pt-32 pb-16">
         <Breadcrumbs items={crumbs} />
         {page.hero?.eyebrow ? (
@@ -64,10 +68,16 @@ export default function ServicePage({ page }) {
       <NameRow heading="Technologies" items={page.technologies} />
       <NameRow heading="Integrations" items={page.integrations} />
       <CopySection heading={page.process?.heading || "Process"} items={page.process?.steps} ordered />
-      <CaseStudyRow studies={page.caseStudies} />
       <TestimonialRow testimonials={page.testimonials} />
       <FaqList faqs={faqs} />
+      <RelatedLinks
+        services={[]}
+        caseStudies={page.caseStudies}
+        industries={page.relatedIndustries}
+        resources={page.resources}
+      />
       <CtaBlock cta={page.cta} />
+      <CtaSet />
     </article>
   );
 }
@@ -125,26 +135,6 @@ function NameRow({ heading, items = [] }) {
         {items.map((item) => (
           <li key={item.id || item.name} className="rounded-full border border-white/10 px-4 py-2 text-sm">
             {item.name}
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function CaseStudyRow({ studies }) {
-  const list = Array.isArray(studies) ? studies.filter((item) => item && typeof item === "object") : [];
-  if (!list.length) return null;
-  return (
-    <section className="container mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold">Case studies</h2>
-      <ul className="mt-8 grid gap-6 md:grid-cols-2">
-        {list.map((study) => (
-          <li key={study.id}>
-            <Link href={`/case-studies/${study.slug}`} className="block rounded-2xl border border-white/10 p-6 hover:border-white/30">
-              <h3 className="text-xl font-semibold">{study.title}</h3>
-              <p className="mt-2 text-neutral-400">{study.client}</p>
-            </Link>
           </li>
         ))}
       </ul>

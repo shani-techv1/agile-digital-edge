@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "../../../../components/seo/Breadcrumbs";
 import JsonLd from "../../../../components/seo/JsonLd";
+import RelatedLinks from "../../../../components/seo/RelatedLinks";
 import { findPublishedBySlug } from "../../../../lib/content";
 import { mediaUrl, metadataFromDoc } from "../../../../lib/seo";
 import { breadcrumbSchema } from "../../../../lib/schema";
@@ -28,7 +28,7 @@ export default async function IndustryPage({ params }) {
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "Industries", path: "/industries" },
-    { name: industry.title, path: `/industries/${industry.slug}` },
+    { name: industry.meta?.breadcrumbTitle || industry.title, path: `/industries/${industry.slug}` },
   ];
   const image = mediaUrl(industry.hero?.image);
   const services = Array.isArray(industry.relatedServices) ? industry.relatedServices.filter((item) => item?.slug) : [];
@@ -49,33 +49,7 @@ export default async function IndustryPage({ params }) {
           </div>
         ) : null}
         {industry.body ? <p className="mt-10 max-w-3xl text-lg leading-relaxed text-neutral-300">{industry.body}</p> : null}
-        {services.length ? (
-          <section className="mt-14">
-            <h2 className="text-3xl font-bold">Related services</h2>
-            <ul className="mt-6 grid gap-4 md:grid-cols-2">
-              {services.map((service) => (
-                <li key={service.id}>
-                  <Link href={`/${service.slug}`} className="block rounded-2xl border border-white/10 p-5">{service.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
-        {stories.length ? (
-          <section className="mt-14">
-            <h2 className="text-3xl font-bold">Related case studies</h2>
-            <ul className="mt-6 grid gap-4 md:grid-cols-2">
-              {stories.map((story) => (
-                <li key={story.id}>
-                  <Link href={`/case-studies/${story.slug}`} className="block rounded-2xl border border-white/10 p-5">
-                    <h3 className="text-xl font-semibold">{story.title}</h3>
-                    <p className="mt-2 text-neutral-400">{story.client}</p>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
+        <RelatedLinks services={services} caseStudies={stories} />
       </div>
     </article>
   );

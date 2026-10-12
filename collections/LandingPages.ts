@@ -239,6 +239,33 @@ export const LandingPages: CollectionConfig = {
       hasMany: true,
     },
     {
+      name: "relatedIndustries",
+      type: "relationship",
+      relationTo: "industries",
+      hasMany: true,
+      label: "Related industries",
+    },
+    {
+      name: "resources",
+      type: "array",
+      label: "Related resources",
+      fields: [
+        { name: "label", type: "text", required: true },
+        { name: "url", type: "text", required: true },
+      ],
+    },
+    {
+      name: "schemaType",
+      type: "select",
+      label: "Schema",
+      defaultValue: "service",
+      options: [
+        { label: "Service", value: "service" },
+        { label: "None", value: "none" },
+      ],
+      admin: { description: "Service pages emit Service JSON-LD. Choose None to skip that block." },
+    },
+    {
       name: "testimonials",
       type: "array",
       fields: [

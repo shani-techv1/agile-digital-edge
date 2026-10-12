@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { gsap } from "gsap";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { readStoredUtm } from "../../../components/seo/UtmCapture";
+import { track } from "../../../lib/analytics";
 
 function ContactContent() {
   const containerRef = useRef(null);
@@ -111,10 +113,11 @@ function ContactContent() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, ...readStoredUtm() }),
       });
 
       if (response.ok) {
+        track("contact_submission", { form_name: "contact" });
         setStatus({
           type: "success",
           message: "Message sent successfully! We'll be in touch.",

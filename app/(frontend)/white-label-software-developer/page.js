@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { readStoredUtm } from "../../../components/seo/UtmCapture";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Globe,
@@ -388,6 +389,7 @@ export default function WhiteLabelSoftwareDeveloper() {
           teamSize: formData.teamSize,
           services: formData.services.join(", "),
           message: formData.message,
+          ...readStoredUtm(),
         }),
       });
 

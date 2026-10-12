@@ -1,9 +1,27 @@
 import { NextResponse } from "next/server";
 import { escapeHtml, getMailer, oneLine } from "../../../lib/mail";
+import { saveLead } from "../../../lib/leads/saveLead";
 
 export async function POST(req) {
   try {
-    const { name, company, email, phone, service, budget, message } = await req.json();
+    const body = await req.json();
+    const { name, company, email, phone, service, budget, message } = body;
+    await saveLead({
+      name,
+      email,
+      company,
+      platform: service,
+      requirement: [message, budget && `Budget: ${budget}`, phone && `Phone: ${phone}`].filter(Boolean).join("\n"),
+      source: "contact",
+      landingPath: body.landingPath || "/contact",
+      utmSource: body.utmSource,
+      utmMedium: body.utmMedium,
+      utmCampaign: body.utmCampaign,
+      utmTerm: body.utmTerm,
+      utmContent: body.utmContent,
+      gclid: body.gclid,
+      referrer: body.referrer,
+    });
     const { transporter, user } = getMailer();
 
     await transporter.sendMail({

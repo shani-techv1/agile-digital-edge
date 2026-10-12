@@ -96,7 +96,8 @@ export const CaseStudies: CollectionConfig = {
         { name: "role", type: "text" },
       ],
     },
-    { name: "related", type: "relationship", relationTo: "caseStudies", hasMany: true },
+    { name: "related", type: "relationship", relationTo: "caseStudies", hasMany: true, label: "Related case studies" },
+    { name: "relatedServices", type: "relationship", relationTo: "landingPages", hasMany: true, label: "Related services" },
     {
       name: "cta",
       type: "group",

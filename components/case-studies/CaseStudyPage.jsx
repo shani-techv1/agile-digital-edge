@@ -1,21 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import CaseStudyView from "../analytics/CaseStudyView";
+import { CtaSet } from "../cta/CtaLink";
 import Breadcrumbs from "../seo/Breadcrumbs";
 import JsonLd from "../seo/JsonLd";
+import RelatedLinks from "../seo/RelatedLinks";
 import { mediaUrl } from "../../lib/seo";
 import { breadcrumbSchema } from "../../lib/schema";
 
 export default function CaseStudyPage({ story }) {
+  const crumbName = story.meta?.breadcrumbTitle || story.title;
   const crumbs = [
     { name: "Home", path: "/" },
     { name: "Case studies", path: "/case-studies" },
-    { name: story.title, path: `/case-studies/${story.slug}` },
+    { name: crumbName, path: `/case-studies/${story.slug}` },
   ];
   const logo = mediaUrl(story.logo);
 
   return (
     <article className="bg-black text-white">
       <JsonLd data={breadcrumbSchema(crumbs)} />
+      <CaseStudyView slug={story.slug} title={story.title} />
       <header className="container mx-auto px-6 pt-32 pb-12">
         <Breadcrumbs items={crumbs} />
         <p className="text-sm uppercase tracking-wide text-primary">{story.client}</p>
@@ -39,8 +44,9 @@ export default function CaseStudyPage({ story }) {
       <TagList heading="Technology" items={story.technology} />
       <Results results={story.results} />
       <Testimonial testimonial={story.testimonial} />
-      <Related stories={story.related} />
+      <RelatedLinks caseStudies={story.related} services={story.relatedServices} />
       <Cta cta={story.cta} />
+      <CtaSet />
     </article>
   );
 }
@@ -145,26 +151,6 @@ function Testimonial({ testimonial }) {
           {testimonial.role ? `, ${testimonial.role}` : ""}
         </footer>
       </blockquote>
-    </section>
-  );
-}
-
-function Related({ stories }) {
-  const list = Array.isArray(stories) ? stories.filter((item) => item?.slug) : [];
-  if (!list.length) return null;
-  return (
-    <section className="container mx-auto px-6 py-12">
-      <h2 className="text-3xl font-bold">Related case studies</h2>
-      <ul className="mt-6 grid gap-4 md:grid-cols-2">
-        {list.map((story) => (
-          <li key={story.id}>
-            <Link href={`/case-studies/${story.slug}`} className="block rounded-2xl border border-white/10 p-5 hover:border-white/30">
-              <h3 className="text-xl font-semibold">{story.title}</h3>
-              <p className="mt-2 text-neutral-400">{story.client}</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }

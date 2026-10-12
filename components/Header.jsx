@@ -112,7 +112,7 @@ export default function Header() {
       <div className="container mx-auto px-6 flex justify-between items-center relative z-50">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold tracking-tight text-white group">
-          <Image src="/logo/LogoSize.svg" alt="Logo" width={144} height={40} className="w-36" priority />
+          <Image src="/logo/LogoSize.svg" alt="Logo" width={144} height={40} className="h-auto w-36" priority />
         </Link>
 
         {/* Desktop Menu */}
