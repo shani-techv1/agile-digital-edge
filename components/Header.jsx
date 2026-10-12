@@ -47,8 +47,11 @@ export default function Header() {
       name: "Resources",
       href: null,
       dropdown: [
+        { name: "Solutions", href: "/solutions" },
+        { name: "Industries", href: "/industries" },
+        { name: "Case Studies", href: "/case-studies" },
+        { name: "Free Ecommerce Audit", href: "/free-ecommerce-audit" },
         { name: "Blogs", href: "https://blog.agiledigitaledge.com" },
-        { name: "Success Stories", href: "/success-stories" },
       ],
     },
     { name: "About", href: "/about" },

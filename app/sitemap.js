@@ -1,53 +1,64 @@
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://agiledigitaledge.com";
+import { getBaseUrl } from "../lib/seo";
+import { serviceSlugs } from "../data/services";
 
-const serviceSlugs = [
-    "web-development",
-    "ecommerce-development",
-    "shopify-app",
-    "ui-ux-design",
-    "mobile-app-development",
-    "seo",
-    "social-media-marketing",
-    "brand-strategy",
-    "content-creation",
-    "cloud-solutions",
-];
+export default async function sitemap() {
+  const baseUrl = getBaseUrl();
+  const staticPaths = [
+    "/",
+    "/services",
+    "/about",
+    "/why-agile",
+    "/work",
+    "/contact",
+    "/solutions",
+    "/industries",
+    "/case-studies",
+    "/free-ecommerce-audit",
+    "/white-label-software-developer",
+    "/web-packages",
+    "/seo-packages",
+    "/ppc-packages",
+    "/smo-packages",
+    "/privacy-policy",
+    "/terms-and-conditions",
+    ...serviceSlugs.filter((slug) => slug !== "branding").map((slug) => `/services/${slug}`),
+  ];
 
-const successStoryIds = [1, 2, 3, 4, 5];
+  const pages = staticPaths.map((path) => ({
+    url: path === "/" ? baseUrl : `${baseUrl}${path}`,
+    changeFrequency: path === "/" ? "weekly" : "monthly",
+    priority: path === "/" ? 1 : 0.7,
+  }));
 
-function entry(path, { changeFrequency, priority }) {
-    return {
-        url: path ? `${baseUrl}${path}` : baseUrl,
-        lastModified: new Date(),
-        changeFrequency,
-        priority,
-    };
+  try {
+    const { findPublished } = await import("../lib/content");
+    const [landings, industries, stories] = await Promise.all([
+      findPublished("landingPages", { "meta.noindex": { not_equals: true } }, 500),
+      findPublished("industries", { "meta.noindex": { not_equals: true } }, 200),
+      findPublished("caseStudies", { "meta.noindex": { not_equals: true } }, 200),
+    ]);
+
+    for (const doc of landings.docs) {
+      pages.push(entry(baseUrl, `/${doc.slug}`, doc.updatedAt));
+    }
+    for (const doc of industries.docs) {
+      pages.push(entry(baseUrl, `/industries/${doc.slug}`, doc.updatedAt));
+    }
+    for (const doc of stories.docs) {
+      pages.push(entry(baseUrl, `/case-studies/${doc.slug}`, doc.updatedAt));
+    }
+  } catch (error) {
+    console.error("Sitemap CMS lookup failed", error);
+  }
+
+  return pages;
 }
 
-export default function sitemap() {
-    const pages = [
-        entry("", { changeFrequency: "weekly", priority: 1 }),
-        entry("/services", { changeFrequency: "weekly", priority: 0.9 }),
-        entry("/about", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/why-agile", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/work", { changeFrequency: "weekly", priority: 0.8 }),
-        entry("/contact", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/success-stories", { changeFrequency: "weekly", priority: 0.8 }),
-        entry("/blogs", { changeFrequency: "weekly", priority: 0.7 }),
-        entry("/white-label-software-developer", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/web-packages", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/seo-packages", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/ppc-packages", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/smo-packages", { changeFrequency: "monthly", priority: 0.8 }),
-        entry("/privacy-policy", { changeFrequency: "yearly", priority: 0.3 }),
-        entry("/terms-and-conditions", { changeFrequency: "yearly", priority: 0.3 }),
-        ...serviceSlugs.map((slug) =>
-            entry(`/services/${slug}`, { changeFrequency: "monthly", priority: 0.7 })
-        ),
-        ...successStoryIds.map((id) =>
-            entry(`/success-stories/${id}`, { changeFrequency: "monthly", priority: 0.6 })
-        ),
-    ];
-
-    return pages;
+function entry(baseUrl, path, updatedAt) {
+  return {
+    url: `${baseUrl}${path}`,
+    lastModified: updatedAt ? new Date(updatedAt) : undefined,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  };
 }

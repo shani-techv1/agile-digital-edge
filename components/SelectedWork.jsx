@@ -140,6 +140,7 @@ export default function SelectedWork() {
                   src={work.image}
                   alt={work.title}
                   fill
+                  sizes="(min-width: 768px) 60vw, 100vw"
                   className="project-image object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-black/20 transition-colors duration-300 pointer-events-none"></div>
