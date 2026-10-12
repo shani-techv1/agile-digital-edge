@@ -1,0 +1,26 @@
+/* Payload admin styles are loaded from @payloadcms/next/css. */
+
+.field-type.password input,
+.field-type.confirm-password input {
+  padding-inline-end: 2.75rem;
+}
+
+.ade-password-toggle {
+  position: fixed;
+  z-index: 20;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--theme-elevation-500);
+  cursor: pointer;
+}
+
+.ade-password-toggle:hover,
+.ade-password-toggle[aria-pressed="true"] {
+  color: var(--theme-elevation-800);
+}

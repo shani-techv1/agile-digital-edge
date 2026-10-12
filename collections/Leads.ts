@@ -1,0 +1,75 @@
+import type { CollectionConfig } from "payload";
+
+export const Leads: CollectionConfig = {
+  slug: "leads",
+  admin: {
+    useAsTitle: "email",
+    defaultColumns: ["createdAt", "company", "email", "source", "status", "owner"],
+  },
+  access: {
+    create: () => false,
+    read: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
+  fields: [
+    { name: "name", type: "text", required: true },
+    { name: "email", type: "email", required: true },
+    { name: "company", type: "text", required: true },
+    { name: "website", type: "text" },
+    { name: "country", type: "text" },
+    { name: "platform", type: "text" },
+    { name: "requirement", type: "textarea" },
+    {
+      name: "source",
+      type: "select",
+      defaultValue: "audit",
+      options: [
+        { label: "Audit", value: "audit" },
+        { label: "Contact", value: "contact" },
+        { label: "White label", value: "white-label" },
+        { label: "CTA", value: "cta" },
+      ],
+    },
+    {
+      name: "landingPath",
+      type: "text",
+      label: "Landing page",
+    },
+    { name: "utmSource", type: "text", label: "UTM source" },
+    { name: "utmMedium", type: "text", label: "UTM medium" },
+    { name: "utmCampaign", type: "text", label: "UTM campaign" },
+    { name: "utmTerm", type: "text", label: "UTM term" },
+    { name: "utmContent", type: "text", label: "UTM content" },
+    { name: "gclid", type: "text" },
+    { name: "referrer", type: "text" },
+    { name: "ip", type: "text", admin: { readOnly: true } },
+    {
+      name: "owner",
+      type: "relationship",
+      relationTo: "users",
+      label: "Sales owner",
+    },
+    {
+      name: "status",
+      type: "select",
+      label: "Lead status",
+      defaultValue: "new",
+      options: [
+        { label: "New", value: "new" },
+        { label: "Contacted", value: "contacted" },
+        { label: "Qualified", value: "qualified" },
+        { label: "Closed", value: "closed" },
+      ],
+    },
+    {
+      name: "crmStatus",
+      type: "select",
+      label: "Email status",
+      defaultValue: "skipped",
+      admin: { description: "Whether the notification email was sent. Lead status is separate." },
+      options: ["skipped", "sent", "error"],
+    },
+    { name: "crmProvider", type: "text" },
+  ],
+};

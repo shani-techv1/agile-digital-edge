@@ -1,12 +1,14 @@
-export default function robots() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://agiledigitaledge.com";
+import { getBaseUrl } from "../lib/seo";
 
-    return {
-        rules: {
-            userAgent: '*',
-            allow: '/',
-            disallow: '/api/',
-        },
-        sitemap: `${baseUrl}/sitemap.xml`,
-    };
+export default function robots() {
+  const baseUrl = getBaseUrl();
+
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/", "/admin"],
+    },
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }

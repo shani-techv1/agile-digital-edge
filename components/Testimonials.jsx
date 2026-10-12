@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const testimonials = [
@@ -128,7 +129,7 @@ const TestimonialsColumn = (props) => {
                   &quot;{text}&quot;
                 </div>
                 <div className="flex items-center gap-3">
-                  <img
+                  <Image
                     width={40}
                     height={40}
                     src={image}

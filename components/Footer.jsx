@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
+import Image from "next/image";
+import { Twitter, Linkedin, Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="text-2xl font-bold tracking-tight text-white group">
-              <img src="/logo/LogoSize.svg" alt="Logo" className="w-40" />
+              <Image src="/logo/LogoSize.svg" alt="Agile Digital Edge" width={160} height={40} className="h-auto w-40" />
             </Link>
             <p className="text-gray-400 leading-relaxed">
               Crafting premium digital experiences for forward-thinking brands.
@@ -18,25 +19,20 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6">Explore</h4>
             <ul className="space-y-4">
-              {['Home', 'Services', 'Web Packages', 'SEO Packages', 'PPC Packages', 'SMO Packages', 'Work', 'About', 'Contact'].map((item) => (
-                <li key={item}>
-                  <Link 
-                    href={
-                      item === 'Home' 
-                        ? '/' 
-                        : item === 'Web Packages' 
-                          ? '/web-packages' 
-                          : item === 'SEO Packages' 
-                            ? '/seo-packages' 
-                            : item === 'PPC Packages' 
-                              ? '/ppc-packages' 
-                              : item === 'SMO Packages' 
-                                ? '/smo-packages' 
-                                : `/${item.toLowerCase()}`
-                    } 
-                    className="text-gray-400 hover:text-primary transition-colors"
-                  >
-                    {item}
+              {[
+                { name: "Home", href: "/" },
+                { name: "Services", href: "/services" },
+                { name: "Solutions", href: "/solutions" },
+                { name: "Industries", href: "/industries" },
+                { name: "Case Studies", href: "/case-studies" },
+                { name: "Free Ecommerce Audit", href: "/free-ecommerce-audit" },
+                { name: "Work", href: "/work" },
+                { name: "About", href: "/about" },
+                { name: "Contact", href: "/contact" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-gray-400 hover:text-primary transition-colors">
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -49,7 +45,7 @@ export default function Footer() {
               {[
                 { name: "Web Development", href: "/services/web-development" },
                 { name: "UI/UX Design", href: "/services/ui-ux-design" },
-                { name: "Branding", href: "/services/branding" },
+                { name: "Brand Strategy", href: "/services/brand-strategy" },
                 { name: "Product Engineering", href: "/services/product-engineering" },
               ].map((item) => (
                 <li key={item.name}>
