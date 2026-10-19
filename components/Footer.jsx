@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-dark-blue pt-20 pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="text-2xl font-bold tracking-tight text-white group">
               <Image src="/logo/LogoSize.svg" alt="Agile Digital Edge" width={160} height={40} className="h-auto w-40" />
@@ -53,6 +53,24 @@ export default function Footer() {
                     href={item.href}
                     className="text-gray-400 hover:text-primary transition-colors"
                   >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-semibold mb-6">Packages</h4>
+            <ul className="space-y-4">
+              {[
+                { name: "Web Design Packages", href: "/web-packages" },
+                { name: "SEO Packages", href: "/seo-packages" },
+                { name: "PPC Packages", href: "/ppc-packages" },
+                { name: "SMO Packages", href: "/smo-packages" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-gray-400 hover:text-primary transition-colors">
                     {item.name}
                   </Link>
                 </li>

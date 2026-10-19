@@ -1,5 +1,6 @@
 import { getBaseUrl } from "../lib/seo";
 import { serviceSlugs } from "../data/services";
+import { products } from "../data/products";
 
 export default async function sitemap() {
   const baseUrl = getBaseUrl();
@@ -13,6 +14,8 @@ export default async function sitemap() {
     "/solutions",
     "/industries",
     "/case-studies",
+    "/products",
+    ...products.map((product) => `/products/${product.slug}`),
     "/free-ecommerce-audit",
     "/white-label-software-developer",
     "/web-packages",

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { menuProducts } from "../data/products";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,14 +35,13 @@ export default function Header() {
       ],
     },
     {
-      name: "Packages",
-      href: null,
-      dropdown: [
-        { name: "Web Design Packages", href: "/web-packages" },
-        { name: "SEO Packages", href: "/seo-packages" },
-        { name: "PPC Packages", href: "/ppc-packages" },
-        { name: "SMO Packages", href: "/smo-packages" },
-      ],
+      name: "agile@products",
+      href: "/products",
+      overviewLabel: "All products",
+      dropdown: menuProducts().map((product) => ({
+        name: product.name,
+        href: `/products/${product.slug}`,
+      })),
     },
     {
       name: "Resources",
@@ -122,7 +122,7 @@ export default function Header() {
               {link.href ? (
                 <Link
                   href={link.href}
-                  className={`whitespace-nowrap text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 ${pathname === link.href ? "text-primary" : "text-gray-300"
+                  className={`whitespace-nowrap text-sm font-medium tracking-wide hover:text-primary transition-colors duration-300 flex items-center gap-1 ${pathname === link.href || (link.href !== "/" && pathname.startsWith(`${link.href}/`)) ? "text-primary" : "text-gray-300"
                     }`}
                 >
                   {link.name}
@@ -222,7 +222,7 @@ export default function Header() {
                       onClick={() => setIsOpen(false)}
                       className="text-lg text-primary font-semibold hover:text-white transition-colors"
                     >
-                      Overview
+                      {link.overviewLabel || "Overview"}
                     </Link>
                   )}
                   {link.dropdown.map((item) => (
