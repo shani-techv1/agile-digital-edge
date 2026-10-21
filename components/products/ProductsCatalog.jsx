@@ -10,10 +10,6 @@ const filters = [
   { id: "partnership", label: "Partnership" },
 ];
 
-function plural(count, noun) {
-  return count === 1 ? noun : `${noun}s`;
-}
-
 export default function ProductsCatalog() {
   const [filter, setFilter] = useState("all");
   const [shown, setShown] = useState("all");
@@ -22,14 +18,8 @@ export default function ProductsCatalog() {
   const buttonsRef = useRef({});
   const timer = useRef(0);
 
-  const core = products.filter((product) => product.type === "core").length;
-  const partnership = products.filter((product) => product.type === "partnership").length;
-  const counts = { all: products.length, core, partnership };
-
   const visible = (shown === "all" ? products.slice() : products.filter((product) => product.type === shown))
     .sort((a, b) => Number(b.type === "core") - Number(a.type === "core"));
-
-  const noun = shown === "core" ? "core product" : shown === "partnership" ? "partnership product" : "product";
 
   function moveGlide() {
     const glide = glideRef.current;
@@ -86,20 +76,6 @@ export default function ProductsCatalog() {
             Open a product to see the full project: what we made, how we made it, the pages, and what changed. The live
             website is there if you want to visit it.
           </p>
-          <div className="stats">
-            <div className="stat">
-              <b>{products.length}</b>
-              <span>{plural(products.length, "Product")}</span>
-            </div>
-            <div className="stat">
-              <b>{core}</b>
-              <span>{plural(core, "Core product")}</span>
-            </div>
-            <div className="stat">
-              <b>{partnership}</b>
-              <span>{plural(partnership, "Partnership")}</span>
-            </div>
-          </div>
         </section>
 
         <div className="toolbar">
@@ -115,15 +91,13 @@ export default function ProductsCatalog() {
                 aria-pressed={filter === item.id}
                 onClick={() => choose(item.id)}
               >
-                {item.label} <span className="count">{counts[item.id]}</span>
+                {item.label}
               </button>
             ))}
           </div>
         </div>
 
-        <p className="result-line">
-          {visible.length} {plural(visible.length, noun)}. Open a card to read the project.
-        </p>
+        <p className="result-line">Open a card to read the project.</p>
         <section className={`product-grid${fading ? " is-fading" : ""}`} aria-live="polite">
           {visible.map((product) => {
             const featured = shown === "all" && product.menu === 1;
