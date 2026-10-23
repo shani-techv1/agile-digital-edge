@@ -109,7 +109,7 @@ export default function ProductView({ product }) {
           </div>
         </section>
 
-        {/* Pricing model section — hidden for now
+        {/* Pricing / project cost model section — hidden for now
         <section className="section" id="pricing">
           <p className="kicker">05 — Pricing</p>
           <h2>Our price to build this</h2>
