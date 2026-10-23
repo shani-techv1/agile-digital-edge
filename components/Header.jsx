@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { menuProducts } from "../data/products";
+// import { menuProducts } from "../data/products";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,14 +34,25 @@ export default function Header() {
         { name: "White Label Software Development", href: "/white-label-software-developer" },
       ],
     },
+    // agile@products — hidden from the top menu for now
+    // {
+    //   name: "agile@products",
+    //   href: "/products",
+    //   overviewLabel: "All products",
+    //   dropdown: menuProducts().map((product) => ({
+    //     name: product.name,
+    //     href: `/products/${product.slug}`,
+    //   })),
+    // },
     {
-      name: "agile@products",
-      href: "/products",
-      overviewLabel: "All products",
-      dropdown: menuProducts().map((product) => ({
-        name: product.name,
-        href: `/products/${product.slug}`,
-      })),
+      name: "Packages",
+      href: null,
+      dropdown: [
+        { name: "Web Design Packages", href: "/web-packages" },
+        { name: "SEO Packages", href: "/seo-packages" },
+        { name: "PPC Packages", href: "/ppc-packages" },
+        { name: "SMO Packages", href: "/smo-packages" },
+      ],
     },
     {
       name: "Resources",

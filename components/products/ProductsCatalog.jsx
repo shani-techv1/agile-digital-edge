@@ -1,66 +1,8 @@
-"use client";
-
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { products, typeLabel } from "../../data/products";
 
-const filters = [
-  { id: "all", label: "All" },
-  { id: "core", label: "Core" },
-  { id: "partnership", label: "Partnership" },
-];
-
 export default function ProductsCatalog() {
-  const [filter, setFilter] = useState("all");
-  const [shown, setShown] = useState("all");
-  const [fading, setFading] = useState(false);
-  const glideRef = useRef(null);
-  const buttonsRef = useRef({});
-  const timer = useRef(0);
-
-  const visible = (shown === "all" ? products.slice() : products.filter((product) => product.type === shown))
-    .sort((a, b) => Number(b.type === "core") - Number(a.type === "core"));
-
-  function moveGlide() {
-    const glide = glideRef.current;
-    const active = buttonsRef.current[filter];
-    if (!glide || !active) return;
-    glide.style.width = `${active.offsetWidth}px`;
-    glide.style.transform = `translateX(${active.offsetLeft}px)`;
-  }
-
-  useEffect(() => {
-    const start = window.location.hash.replace("#", "");
-    if (start === "core" || start === "partnership") {
-      setFilter(start);
-      setShown(start);
-    }
-  }, []);
-
-  useLayoutEffect(() => {
-    moveGlide();
-  }, [filter, shown]);
-
-  useEffect(() => {
-    const onResize = () => moveGlide();
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [filter]);
-
-  useEffect(() => () => window.clearTimeout(timer.current), []);
-
-  function choose(next) {
-    if (next === filter) return;
-    setFilter(next);
-    const hash = next === "all" ? "" : `#${next}`;
-    window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
-    window.clearTimeout(timer.current);
-    setFading(true);
-    timer.current = window.setTimeout(() => {
-      setShown(next);
-      setFading(false);
-    }, 180);
-  }
+  const visible = products.slice().sort((a, b) => a.menu - b.menu);
 
   return (
     <div className="ade-catalog">
@@ -78,29 +20,10 @@ export default function ProductsCatalog() {
           </p>
         </section>
 
-        <div className="toolbar">
-          <div className="filters" role="group" aria-label="Filter products">
-            <span className="filter-glide" ref={glideRef} aria-hidden="true" />
-            {filters.map((item) => (
-              <button
-                key={item.id}
-                type="button"
-                ref={(node) => {
-                  buttonsRef.current[item.id] = node;
-                }}
-                aria-pressed={filter === item.id}
-                onClick={() => choose(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         <p className="result-line">Open a card to read the project.</p>
-        <section className={`product-grid${fading ? " is-fading" : ""}`} aria-live="polite">
+        <section className="product-grid">
           {visible.map((product) => {
-            const featured = shown === "all" && product.menu === 1;
+            const featured = product.menu === 1;
             return (
               <Link
                 key={product.slug}
@@ -123,9 +46,6 @@ export default function ProductsCatalog() {
             );
           })}
         </section>
-        <div className={`empty${visible.length ? "" : " is-visible"}`}>
-          No products in this group yet. Add one in the product list.
-        </div>
 
         <section className="cta">
           <div>

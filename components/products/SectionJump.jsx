@@ -20,6 +20,11 @@ export default function SectionJump() {
       <a href="#pages" data-jump="pages" onClick={jump}>
         Pages
       </a>
+      {/* Pricing model section — hidden for now
+      <a href="#pricing" data-jump="pricing" onClick={jump}>
+        Pricing
+      </a>
+      */}
       <a href="#changed" data-jump="changed" onClick={jump}>
         What changed
       </a>

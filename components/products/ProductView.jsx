@@ -109,6 +109,39 @@ export default function ProductView({ product }) {
           </div>
         </section>
 
+        {/* Pricing model section — hidden for now
+        <section className="section" id="pricing">
+          <p className="kicker">05 — Pricing</p>
+          <h2>Our price to build this</h2>
+          <p className="section-lead">{product.pricing.intro}</p>
+          <div className="prices">
+            {product.pricing.plans.map((plan) => (
+              <article className={`price tone-${plan.tone}${plan.featured ? " featured" : ""}`} key={plan.name}>
+                <h3>{plan.name}</h3>
+                <div className="amount-wrap">
+                  <p className="amount">
+                    <small>{plan.currency || "$"}</small>
+                    {plan.price || "—"}
+                  </p>
+                  <p className="period">{plan.period || "/ project"}</p>
+                </div>
+                <ul>
+                  {plan.points.map((point) => (
+                    <li key={point}>
+                      <span>{point}</span>
+                      <i aria-hidden="true" />
+                    </li>
+                  ))}
+                </ul>
+                <Link className="select" href={`/contact?product=${product.slug}&plan=${encodeURIComponent(plan.name)}`}>
+                  Select
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+        */}
+
         <section className="section" id="changed">
           <p className="kicker">05 — Result</p>
           <h2>What changed</h2>

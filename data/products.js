@@ -27,9 +27,39 @@ export const products = [
       { name: "Create biodata", detail: "The main form: personal details, rashi and nakshatra, family, contact, and a photo with a rounded, circle, or gold-arch frame." },
       { name: "Templates", detail: "The format library, including Cream & Gold Ganesha, Royal Red Mandana, Royal Sapphire Arch, Pastel Pink Elegance, Classic Minimalist, Traditional Gold Flourish, Blue Floral Leaves & Ganesha, and Royal Purple Damask." },
       { name: "Gallery", detail: "Examples of the finished biodata layouts." },
-      { name: "Pricing", detail: "Download options for the formats. A public coupon is offered on the site." },
+      { name: "Pricing", detail: "The page where a visitor chooses a format and downloads the biodata." },
       { name: "FAQ and blog", detail: "Answers about photos, languages, custom fields, and edits after download, plus articles on what a marriage biodata should include." }
     ],
+    pricing: {
+      intro: "Choose a build for a product like BiodataMake. This is our price, not a price from the live website.",
+      plans: [
+        {
+          name: "Basic",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "blue",
+          points: ["Biodata form", "One format", "Profile photo", "A4 PDF"],
+        },
+        {
+          name: "Premium",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "orange",
+          featured: true,
+          points: ["Every format", "Live preview", "Four languages", "Gallery and FAQ"],
+        },
+        {
+          name: "Custom",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "teal",
+          points: ["Photo frames", "Blog", "Print-ready PDF", "WhatsApp file"],
+        },
+      ],
+    },
     impact: [
       { title: "A biodata without design software", text: "Someone can enter the details and leave with a formatted PDF." },
       { title: "One form, many formats", text: "Traditional, modern, bride, and groom layouts use the same information." },
@@ -68,6 +98,36 @@ export const products = [
       { name: "For partners", detail: "Online and offline status, a travel radius, wallet withdrawals, and daily, weekly, and monthly earnings." },
       { name: "FAQ and pre-register", detail: "Answers on pricing, grocery invoices, verification, and cities, plus waitlist forms for a customer or a partner." }
     ],
+    pricing: {
+      intro: "Choose a build for a product like EazyKnock. This is our price, not a price from the live website.",
+      plans: [
+        {
+          name: "Basic",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "blue",
+          points: ["Service catalog", "Booking steps", "Customer page", "Pre-register form"],
+        },
+        {
+          name: "Premium",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "orange",
+          featured: true,
+          points: ["Customer and partner paths", "Live tracking", "In-app chat", "Razorpay payments"],
+        },
+        {
+          name: "Custom",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "teal",
+          points: ["Partner payouts", "Travel radius", "Address book", "Launch waitlist"],
+        },
+      ],
+    },
     impact: [
       { title: "One place for the home services", text: "Cleaning, cooking, and the services still coming soon are listed on the same site." },
       { title: "The price is visible before the booking", text: "Plans show inclusions and an estimate before the customer confirms." },
@@ -105,6 +165,36 @@ export const products = [
       { name: "Table menu", detail: "The guest-facing menu opened from the QR code." },
       { name: "Kitchen and waiter boards", detail: "Live boards for the kitchen and for staff on the floor." }
     ],
+    pricing: {
+      intro: "Choose a build for a product like Scan2Serve. This is our price, not a price from the live website.",
+      plans: [
+        {
+          name: "Basic",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "blue",
+          points: ["Restaurant account", "Login", "Digital menu", "Guest page"],
+        },
+        {
+          name: "Premium",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "orange",
+          featured: true,
+          points: ["QR table ordering", "Kitchen board", "Waiter board", "Cash checkout"],
+        },
+        {
+          name: "Custom",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "teal",
+          points: ["Registration", "Live order boards", "Table menu", "Restaurant home page"],
+        },
+      ],
+    },
     impact: [
       { title: "The order starts at the table", text: "A guest can open the menu from a QR code instead of waiting to flag someone down." },
       { title: "Kitchen and floor see the same order", text: "The live boards keep the kitchen and the waiters on the current ticket." },
@@ -143,6 +233,36 @@ export const products = [
       { name: "Admin", detail: "Dashboard for creating and editing jobs, archived jobs, applications, messages, mock-interview requests, and settings." },
       { name: "Contact", detail: "A public contact page for people who are not ready to apply." }
     ],
+    pricing: {
+      intro: "Choose a build for a product like PeopleRefer. This is our price, not a price from the live website.",
+      plans: [
+        {
+          name: "Basic",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "blue",
+          points: ["Job list", "Job page", "Apply form", "Contact page"],
+        },
+        {
+          name: "Premium",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "orange",
+          featured: true,
+          points: ["Candidate account", "Applications dashboard", "Admin for jobs", "Messages"],
+        },
+        {
+          name: "Custom",
+          price: "",
+          currency: "$",
+          period: "/ project",
+          tone: "teal",
+          points: ["Mock interviews", "Email verification", "Archived jobs", "Admin settings"],
+        },
+      ],
+    },
     impact: [
       { title: "Roles and applications live in one portal", text: "A candidate can find a job, apply, and come back to the same application." },
       { title: "Hiring has an admin, not a shared inbox", text: "Jobs, applications, and messages are handled inside the admin area." },
